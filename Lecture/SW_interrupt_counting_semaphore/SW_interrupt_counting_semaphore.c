@@ -38,11 +38,6 @@ static void vLED_displayTask(void* pvParameters)
 	}
 }
 
-void vApplicationIdleHook(void)
-{
-
-}
-
 int main(void)
 {
 	DDRD = 0x00;

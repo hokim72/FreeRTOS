@@ -58,11 +58,6 @@ void vApplicationTickHook(void)
 	}
 }
 
-void vApplicationIdleHook(void)
-{
-
-}
-
 int main(void)
 {
 	uartIOInit();

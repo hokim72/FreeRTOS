@@ -21,11 +21,6 @@ void vComRxTxTestTask(void* pvParameters)
 	}
 }
 
-void vApplicationIdleHook(void)
-{
-
-}
-
 int main(void)
 {
 	serialIOInit(64);

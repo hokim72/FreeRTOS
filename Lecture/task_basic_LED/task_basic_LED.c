@@ -23,11 +23,6 @@ void vTask2_flash_led(void* pvParameters)
 	}
 }
 
-void vApplicationIdleHook(void)
-{
-
-}
-
 int main(void) 
 {
 	DDRF = 0xFF; // PORTF : LED Port

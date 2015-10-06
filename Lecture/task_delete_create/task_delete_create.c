@@ -90,11 +90,6 @@ void vtaskControlTask(void* pvParameters)
 	}
 }
 
-void vApplicationIdleHook(void)
-{
-
-}
-
 int main(void)
 {
 	DDRK = 0x00;

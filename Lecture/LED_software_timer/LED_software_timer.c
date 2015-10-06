@@ -43,11 +43,6 @@ void vTask_speed_control()
 	}
 }
 
-void vApplicationIdleHook(void)
-{
-
-}
-
 int main(void)
 {
 	DDRF = 0xFF;

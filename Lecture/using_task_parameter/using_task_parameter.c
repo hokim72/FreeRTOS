@@ -21,11 +21,6 @@ void vTaskFunction(void* pvParameters)
 	}
 }
 
-void vApplicationIdleHook(void)
-{
-
-}
-
 int main(void)
 {
 	uartIOInit();
