@@ -64,7 +64,8 @@ ISR(USART0_RX_vect)
 
 	if (xHigherPriorityTaskWoken != pdFALSE)
 	{
-		taskYIELD();
+		//taskYIELD();
+		vPortYield();
 	}
 }
 
