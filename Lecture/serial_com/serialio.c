@@ -48,7 +48,7 @@ void serialIOPutchar(char c, FILE *stream) {
 char serialIOGetchar(FILE *stream) {
 	char cChar;
 
-	xQueueReceive(xRxedChars, &cChar, 0);
+	xQueueReceive(xRxedChars, &cChar, portMAX_DELAY);
 
 	return cChar;
 }

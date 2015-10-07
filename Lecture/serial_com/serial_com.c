@@ -14,9 +14,7 @@ void vComRxTxTestTask(void* pvParameters)
 	vTaskDelay(100);
 	for (;;)
 	{
-		do {
-			inChar = getchar();
-		} while (inChar == 0);
+		inChar = getchar();
 		putchar((char)inChar);
 	}
 }
