@@ -15,8 +15,10 @@ void vTask1(void* pvParameters)
 	for (;;)
 	{
 		// Print out the name of this task.
+		vTaskSuspendAll();
 		printf(pcTaskName);
 		fflush(stdout);
+		xTaskResumeAll();
 
 		// Delay for a period
 		// This loop is just a very crude delay implementation. There is
@@ -34,8 +36,10 @@ void vTask2(void* pvParameters)
 	for (;;)
 	{
 		// Print out the name of this task.
+		vTaskSuspendAll();
 		printf(pcTaskName);
 		fflush(stdout);
+		xTaskResumeAll();
 
 		// Delay for a period
 		// This loop is just a very crude delay implementation. There is

@@ -39,12 +39,16 @@ static void vIntegerGenerator(void* pvParameters)
 
 		// Force an interrupt so the interrupt service routine can read the
 		// values from the queue.
+		vTaskSuspendAll();
 		printf("Generator task - About to generate an interrupt.\n");
 		fflush(stdout);
+		xTaskResumeAll();
 		PORTD &= ~(1 << PD0);
 		PORTD |= (1 << PD0);
+		vTaskSuspendAll();
 		printf("Generator task - Interrupt generated.\n\n");
 		fflush(stdout);
+		xTaskResumeAll();
 	}
 }
 
@@ -58,8 +62,10 @@ static void vStringPrinter(void* pvParameters)
 		xQueueReceive(xStringQueue, &pcString, portMAX_DELAY);
 
 		// Print out the string received.
+		vTaskSuspendAll();
 		printf(pcString);
 		fflush(stdout);
+		xTaskResumeAll();
 	}
 }
 

@@ -14,8 +14,10 @@ void vTask2(void* pvParameters)
 	// vTaskDelete() using NULL as the parameter, but instead and purely
 	// for demonstration purposes it instead calls vTaskDelete() passing its
 	// own task handle.
+	vTaskSuspendAll();
 	printf("Task 2 is running and about to delete itself\n");
 	fflush(stdout);
+	xTaskResumeAll();
 	vTaskDelete(xTask2Handle);
 }
 
@@ -26,8 +28,10 @@ void vTask1(void* pvParameters)
 	for (;;)
 	{
 		// Print out the name of this task.
+		vTaskSuspendAll();
 		printf("Task 1 is running\n");
 		fflush(stdout);
+		xTaskResumeAll();
 
 		// Create task 2 at a higher priority. Again the task parameter is not
 		// used so it set to NULL - BUT this time the task handle is required

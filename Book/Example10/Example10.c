@@ -45,8 +45,10 @@ static void vSenderTask(void* pvParameters)
 			// The send operation could not complete because the queue was full
 			// - this must be an error as the queue should never contain more
 			// than one item!
+			vTaskSuspendAll();
 			printf("Could not send to the queue.\n");
 			fflush(stdout);
+			xTaskResumeAll();
 		}
 
 		// Allow the other sender task to execute. taskYIELD() informs the
@@ -71,7 +73,10 @@ static void vReceiverTask(void* pvParameters)
 		// immediately remove any data that is written to the queue.
 		if (uxQueueMessagesWaiting(xQueue) != 0)
 		{
+			vTaskSuspendAll();
 			printf("Queue should have been empty!\n");
+			fflush(stdout);
+			xTaskResumeAll();
 		}
 
 		// Receive data from the queue.
@@ -95,15 +100,20 @@ static void vReceiverTask(void* pvParameters)
 		{
 			// Data was successfully received from the queue, print out the
 			// received value.
+			vTaskSuspendAll();
 			printf("Received = %ld\n", lReceivedValue);
 			fflush(stdout);
+			xTaskResumeAll();
 		}
 		else
 		{
 			// Data was not received from the queue even after waiting for 
 			// 100ms. This must be an error as the sending tasks are free
 			// running and will be continuously writing to the queue.
+			vTaskSuspendAll();
 			printf("Could not receive from the queue.\n");
+			fflush(stdout);
+			xTaskResumeAll();
 		}
 	}
 }

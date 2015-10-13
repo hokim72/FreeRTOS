@@ -23,8 +23,10 @@ void vTask1(void* pvParameters)
 	for (;;)
 	{
 		// Print out the name of this task.
+		vTaskSuspendAll();
 		printf("Task 1 is running\n");
 		fflush(stdout);
+		xTaskResumeAll();
 
 		// Setting the Task 2 priority above the Task 1 priority will cause
 		// Task2 to immediately start running (as then Task 2 will have the 

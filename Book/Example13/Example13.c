@@ -21,12 +21,16 @@ static void vPeriodicTask(void* pvParameters)
 
 		// Generate the interrupt, printing a message both before hand and
 		// afterwards so the sequence of execution is evident from the output.
+		vTaskSuspendAll();
 		printf("Periodic task - About to generate an interrupt.\n");
 		fflush(stdout);
+		xTaskResumeAll();
 		PORTD &= ~(1 << PD0);
 		PORTD |= (1 << PD0);
+		vTaskSuspendAll();
 		printf("Periodic task - Interrupt generated.\n\n");
 		fflush(stdout);
+		xTaskResumeAll();
 	}
 }
 
@@ -49,8 +53,10 @@ static void vHandlerTask(void* pvParameters)
 
 		// To get here event must have occured. Process the event (in this
 		// case we just print out a message).
+		vTaskSuspendAll();
 		printf("Handler task - Processing event.\n");
 		fflush(stdout);
+		xTaskResumeAll();
 	}
 }
 

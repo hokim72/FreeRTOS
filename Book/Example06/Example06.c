@@ -18,8 +18,10 @@ void vContinuousProcessingTask(void* pvParameters)
 	{
 		// Print out the name of this task. This task just does this repeatedly
 		// without ever blocking or delaying.
+		vTaskSuspendAll();
 		printf(pcTaskName);
 		fflush(stdout);
+		xTaskResumeAll();
 	}
 }
 
@@ -37,8 +39,10 @@ void vPeriodicTask(void* pvParameters)
 	for (;;)
 	{
 		// Print out the name of this task.
+		vTaskSuspendAll();
 		printf("Periodic task is running......\n");
 		fflush(stdout);
+		xTaskResumeAll();
 
 		// This task should execute exactly every 250 milliseconds exactly.
 		vTaskDelayUntil(&xLastWakeTime, (100/portTICK_RATE_MS));

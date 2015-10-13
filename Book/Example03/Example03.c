@@ -18,8 +18,10 @@ void vTaskFunction(void* pvParameters)
 	for (;;)
 	{
 		// Print out the name of this task.
+		vTaskSuspendAll();
 		printf(pcTaskName);
 		fflush(stdout);
+		xTaskResumeAll();
 
 		// Delay for a perid.
 		// This loop is just very crude delay implementation. There is

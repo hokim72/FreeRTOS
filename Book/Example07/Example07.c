@@ -28,8 +28,10 @@ void vTaskFunction(void* pvParameters)
 	for (;;)
 	{
 		// Print out the name of this task.
+		vTaskSuspendAll();
 		printf("%s, ulIdleCycleCount = %lu\n", pcTaskName, ulIdleCycleCount);
 		fflush(stdout);
+		xTaskResumeAll();
 
 		// Delay for a period. This time a call to vTaskDelay() is used which
 		// places the task into the Blocked state until the delay period has

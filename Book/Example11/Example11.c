@@ -54,8 +54,11 @@ static void vSenderTask(void* pvParameters)
 			// 100ms. This must be an error as the receiving task should make
 			// space in the queue as soon as both sending tasks are in 
 			// the Blocked state.
+			vTaskSuspendAll();
 			printf("Could not send to the queue.\n");
 			fflush(stdout);
+			xTaskResumeAll();
+
 		}
 
 		// Allow the other sender task to execute.
@@ -79,8 +82,10 @@ static void vReceiverTask(void* pvParameters)
 		// length - 3 in this case.
 		if (uxQueueMessagesWaiting(xQueue) != 3)
 		{
+			vTaskSuspendAll();
 			printf("Queue should have been full!\n");
 			fflush(stdout);
+			xTaskResumeAll();
 		}
 
 		// Receive from the queue.
@@ -102,21 +107,27 @@ static void vReceiverTask(void* pvParameters)
 			// received value and the source of the value.
 			if (xReceivedStructure.ucSource == mainSENDER_1)
 			{
+				vTaskSuspendAll();
 				printf("From Sender 1 = %d\n", xReceivedStructure.ucValue);
 				fflush(stdout);
+				xTaskResumeAll();
 			}
 			else
 			{
+				vTaskSuspendAll();
 				printf("From Sender 2 = %d\n", xReceivedStructure.ucValue);
 				fflush(stdout);
+				xTaskResumeAll();
 			}
 		}
 		else
 		{
 			// Nothing was received from the queue. This must be an error
 			// as this task should only run when the queue is full.
+			vTaskSuspendAll();
 			printf("Could not receive from the queue.\n");
 			fflush(stdout);
+			xTaskResumeAll();
 		}
 	}
 }

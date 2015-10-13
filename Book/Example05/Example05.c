@@ -24,8 +24,10 @@ void vTaskFunction(void* pvParameters)
 	for (;;)
 	{
 		// Print out the name of this task.
+		vTaskSuspendAll();
 		printf(pcTaskName);
 		fflush(stdout);
+		xTaskResumeAll();
 
 		// This task should execute exactly every 250 milliseconds. As per
 		// the vTaskDelay() function, time is measured in ticks, and the
